@@ -24,3 +24,11 @@ that you have taken your program course requirements and fulfilled your
 certain faculty requirements. Overall, neatly seeing the courses you have 
 taken allows for better organization of future courses and ensures that you 
 maximize your degree.
+
+
+## User Stories
+
+- As a user, I want to be able to add a course to my course taken list
+- As a user, I want to be able to view the list of my courses in my courses taken list
+- As a user, I want to be able to remove a course from my course taken list
+- As a user, I want to be able to add the grade I got in a course
