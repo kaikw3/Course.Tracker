@@ -121,7 +121,7 @@ public class CourseListApp {
             System.out.println("Sorry, you Courses Taken list is empty.");
         } else {
             for (Course c : coursestaken.getList()) {
-                System.out.println("•" + c.getCourseCode() + " | "
+                System.out.println(c.getCourseCode() + " | "
                         + c.getCourseName() + " | " + c.getCourseGrade());
             }
         }
