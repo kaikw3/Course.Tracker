@@ -1,23 +1,22 @@
 package model;
 
-import java.util.ArrayList;
-import model.CoursesTaken;
 
 // Represents a course having a course code, course name, and course grade (in percent)
 public class Course {
-    private String courseCode;
-    private String courseName;
-    private double courseGrade;
+    private String courseCode;      // Course code
+    private String courseName;      // Name of the course
+    private double courseGrade;     // the grade received in the course
 
 
-    // TODO: Add Documentation
-    // Coursecode and coursename must be in lowercase
+    // EFFECTS: creates a course with course code, course name, and course grade
     public Course(String courseCode, String courseName, double courseGrade) {
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.courseGrade = courseGrade;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets course grade to the double inputted
     public void setCourseGrade(double courseGrade) {
         this.courseGrade = courseGrade;
     }
@@ -33,8 +32,6 @@ public class Course {
     public String getCourseName() {
         return this.courseName;
     }
-
-
 
 
 }

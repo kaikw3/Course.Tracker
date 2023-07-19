@@ -20,11 +20,12 @@ class CoursesTakenTest {
         testCourseList = new CoursesTaken();
         testCourse1 = new Course("cpsc 110", "dr racket", 80.2);
         testCourse2 = new Course("comm 293", "intro to accounting", 95);
+        testCourse3 = new Course("", "", 0);
 
     }
 
     @Test
-    void testContructor() {
+    void testConstructor() {
         assertEquals(0, testCourseList.coursesTaken.size());
 
     }
@@ -40,6 +41,12 @@ class CoursesTakenTest {
         testCourseList.addCourse(testCourse1);
         assertEquals(testCourse1, testCourseList.coursesTaken.get(0));
         assertEquals(1, testCourseList.coursesTaken.size());
+
+        testCourseList.addCourse(testCourse3);
+        assertEquals(testCourse3, testCourseList.coursesTaken.get(1));
+        assertEquals(2, testCourseList.coursesTaken.size());
+
+
     }
 
     @Test

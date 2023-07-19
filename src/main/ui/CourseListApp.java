@@ -1,5 +1,15 @@
 package ui;
 
+/* Citation
+
+Title: TellerApp Source Code
+Author: CPSC 210 Team
+Date: July 2023
+Availability: https://github.students.cs.ubc.ca/CPSC210/TellerApp
+
+ */
+
+
 import model.Course;
 import model.CoursesTaken;
 
@@ -11,6 +21,7 @@ public class CourseListApp {
     private CoursesTaken coursestaken;
     private Scanner input;
     private Course removeCourse;
+    private Course changedCourse;
 
 
     // EFFECTS: runs the course list Application
@@ -22,7 +33,7 @@ public class CourseListApp {
     // EFFECTS: processes the user input
     private void runCourseList() {
         boolean appRun = true;
-        String action = null;
+        String action;
 
         initialize();
 
@@ -49,6 +60,8 @@ public class CourseListApp {
             doRemoveCourse();
         } else if (action.equals("view")) {
             doViewCourseList();
+        } else if (action.equals("change grade")) {
+            doSetCourseGrade();
         } else {
             System.out.println("Sorry, please input a valid selection.");
         }
@@ -71,6 +84,7 @@ public class CourseListApp {
         System.out.println("\t \"add\" -> Add a course");
         System.out.println("\t \"remove\" -> Remove a course");
         System.out.println("\t \"view\" -> View your course list");
+        System.out.println("\t \"change grade\" -> Change grade of a course");
         System.out.println("\t \"quit\" -> Quit Application");
         System.out.println("\nWelcome to CourseTracker, your personal course tracking application! "
                 + "Please select a menu option from above by typing in the word of the action: ");
@@ -103,7 +117,9 @@ public class CourseListApp {
         if (coursestaken.getList().isEmpty()) {
             System.out.println("Sorry, you have not added any courses.");
         } else {
-            System.out.println("Please type the Course Code of the Course you would lie to remove (ie. CPSC 103): ");
+            doViewCourseList();
+            System.out.println("Please type the Course Code of the Course you would lie to remove"
+                    + " from the list above (ie. CPSC 103): ");
             String courseInput = input.next();
             for (Course c : coursestaken.getList()) {
                 if (courseInput.toLowerCase().equals(c.getCourseCode().toLowerCase())) {
@@ -137,4 +153,36 @@ public class CourseListApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the course grade of a specified course in course taken
+    private void doSetCourseGrade() {
+        if (coursestaken.getList().isEmpty()) {
+            System.out.println("Sorry, you have not added any courses to your list.");
+        } else {
+            doViewCourseList();
+            System.out.println("\nFrom the list above, enter the course code of the"
+                    + " course you would like to change the grade of (ie. CPSC 103):");
+            String courseInput = input.next();
+            System.out.println("Enter the grade you would like to change to.");
+            double courseGradeInput = input.nextDouble();
+            for (Course c : coursestaken.getList()) {
+                if (courseInput.toLowerCase().equals(c.getCourseCode().toLowerCase())) {
+
+                    c.setCourseGrade(courseGradeInput);
+                    changedCourse = c;
+
+                }
+            }
+            if (coursestaken.getList().contains(changedCourse)) {
+                System.out.println("Course Grade successfully changed!");
+            } else {
+                System.out.println("\nSorry your course list does not contain that course. Please make sure the "
+                        + "course code is spelt correctly!");
+            }
+        }
+
+    }
+
+
 }
+

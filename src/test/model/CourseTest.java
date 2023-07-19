@@ -13,7 +13,7 @@ class CourseTest {
     @BeforeEach
     void runbefore() {
         testEmptyCourse = new Course("", "", 0);
-        testCourse1 = new Course("comm 293", "intro to accounting", 95);
+        testCourse1 = new Course("comm 293", "intro to accounting", 95.0);
 
     }
 
@@ -23,9 +23,9 @@ class CourseTest {
         assertEquals("", testEmptyCourse.getCourseName());
         assertEquals("", testEmptyCourse.getCourseCode());
 
-        assertEquals(95.2, testCourse1.getCourseGrade());
-        assertEquals("Intro to Accounting", testCourse1.getCourseName());
-        assertEquals("COMM 293", testCourse1.getCourseCode());
+        assertEquals(95, testCourse1.getCourseGrade());
+        assertEquals("intro to accounting", testCourse1.getCourseName());
+        assertEquals("comm 293", testCourse1.getCourseCode());
 
     }
 
