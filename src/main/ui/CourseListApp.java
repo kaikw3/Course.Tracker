@@ -3,9 +3,9 @@ package ui;
 import model.Course;
 import model.CoursesTaken;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
+// Represents the user interface console
 public class CourseListApp {
     private Course course;
     private CoursesTaken coursestaken;
@@ -13,12 +13,13 @@ public class CourseListApp {
     private Course removeCourse;
 
 
-    // TODO
+    // EFFECTS: runs the course list Application
     public CourseListApp() {
         runCourseList();
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: processes the user input
     private void runCourseList() {
         boolean appRun = true;
         String action = null;
@@ -39,6 +40,8 @@ public class CourseListApp {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes the user command
     public void processAction(String action) {
         if (action.equals("add")) {
             doAddCourse();
@@ -52,6 +55,8 @@ public class CourseListApp {
         System.out.println("\t");
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes course and courses taken list
     private void initialize() {
         course = new Course("", "", 0);
         coursestaken = new CoursesTaken();
@@ -60,7 +65,7 @@ public class CourseListApp {
 
     }
 
-    // EFFECTS: Displays courses taken list to user
+    // EFFECTS: Displays the main menu option to user
     private void displayCourseListMenu() {
         System.out.println("\nMAIN MENU");
         System.out.println("\t \"add\" -> Add a course");
@@ -72,6 +77,9 @@ public class CourseListApp {
 
     }
 
+    // REQUIRES: 0 <= course grade entered <= 100
+    // MODIFIES: this
+    // EFFECTS: adds a course to courses taken
     private void doAddCourse() {
         System.out.println("Please type the Course Code of the Course you would lie to add (ie. CPSC 103): ");
         String courseCode = input.next();
@@ -88,6 +96,8 @@ public class CourseListApp {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes a course from courses taken
     private void doRemoveCourse() {
 
         if (coursestaken.getList().isEmpty()) {
@@ -113,7 +123,7 @@ public class CourseListApp {
         }
     }
 
-
+    // EFFECTS: displays the courses in courses taken list
     private void doViewCourseList() {
         System.out.println("\nYOUR COURSES:");
 

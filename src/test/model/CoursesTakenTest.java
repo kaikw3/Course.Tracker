@@ -13,6 +13,7 @@ class CoursesTakenTest {
     private CoursesTaken testCourseList;
     private Course testCourse1;
     private Course testCourse2;
+    private Course testCourse3;
 
     @BeforeEach
     void runBefore() {
@@ -50,10 +51,17 @@ class CoursesTakenTest {
         assertTrue(testCourseList.coursesTaken.contains(testCourse2));
         assertTrue(testCourseList.coursesTaken.contains(testCourse1));
 
-        testCourseList.removeCourse(testCourse2);
+        assertTrue(testCourseList.removeCourse(testCourse2));
         assertEquals(1, testCourseList.coursesTaken.size());
         assertTrue(testCourseList.coursesTaken.contains(testCourse1));
         assertFalse(testCourseList.coursesTaken.contains(testCourse2));
+
+        testCourseList.removeCourse(testCourse3);
+        assertFalse(testCourseList.removeCourse(testCourse3));
+        assertEquals(1, testCourseList.coursesTaken.size());
+        assertTrue(testCourseList.coursesTaken.contains(testCourse1));
+        assertFalse(testCourseList.coursesTaken.contains(testCourse2));
+        assertFalse(testCourseList.coursesTaken.contains(testCourse3));
 
         testCourseList.removeCourse(testCourse1);
         assertEquals(0, testCourseList.coursesTaken.size());
