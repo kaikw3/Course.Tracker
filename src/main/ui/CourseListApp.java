@@ -118,7 +118,7 @@ public class CourseListApp {
             System.out.println("Sorry, you have not added any courses.");
         } else {
             doViewCourseList();
-            System.out.println("Please type the Course Code of the Course you would lie to remove"
+            System.out.println("\nPlease type the Course Code of the Course you would lie to remove"
                     + " from the list above (ie. CPSC 103): ");
             String courseInput = input.next();
             for (Course c : coursestaken.getList()) {
