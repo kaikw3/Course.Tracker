@@ -62,6 +62,7 @@ public class CourseListApp {
 
     // EFFECTS: Displays courses taken list to user
     private void displayCourseListMenu() {
+        System.out.println("\nMAIN MENU");
         System.out.println("\t \"add\" -> Add a course");
         System.out.println("\t \"remove\" -> Remove a course");
         System.out.println("\t \"view\" -> View your course list");
@@ -103,23 +104,27 @@ public class CourseListApp {
                     removeCourse = c;
                 }
             }
-            coursestaken.removeCourse(removeCourse);
-
+            if (coursestaken.removeCourse(removeCourse)) {
+                coursestaken.removeCourse(removeCourse);
+            } else {
+                System.out.println("\nSorry your course list does not contain that course. Please make sure the "
+                        + "course code is spelt correctly!");
+            }
         }
-        System.out.println("\t");
     }
 
+
     private void doViewCourseList() {
-        System.out.println("\t");
+        System.out.println("\nYOUR COURSES:");
+
         if (coursestaken.getList().isEmpty()) {
             System.out.println("Sorry, you Courses Taken list is empty.");
         } else {
             for (Course c : coursestaken.getList()) {
-                System.out.println("•" +  c.getCourseCode() + " | "
+                System.out.println("•" + c.getCourseCode() + " | "
                         + c.getCourseName() + " | " + c.getCourseGrade());
             }
         }
-        System.out.println("\t");
     }
 
 }
