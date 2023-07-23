@@ -29,9 +29,23 @@ public class CoursesTaken {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds a course to the course taken list
-    public void addCourse(Course course) {
-        coursesTaken.add(course);
+    // EFFECTS: adds a course to the course taken list and returns
+    //          true, false if course is already in list
+    public boolean addCourse(Course course) {
+        boolean added = false;
+        for (Course c : this.coursesTaken) {
+            if (c.getCourseCode().toLowerCase().equals(course.getCourseCode().toLowerCase())) {
+                added = true;
+                break;
+            }
+        }
+        if (!added || coursesTaken.isEmpty()) {
+            this.coursesTaken.add(course);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 }

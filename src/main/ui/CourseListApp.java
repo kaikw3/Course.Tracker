@@ -103,11 +103,16 @@ public class CourseListApp {
                 + "If you haven't received a grade yet, put 0 as a placeholder: ");
         Double courseGrade = input.nextDouble();
         Course course = new Course(courseCode, courseName, courseGrade);
-        coursestaken.addCourse(course);
+        if (coursestaken.addCourse(course)) {
+            coursestaken.addCourse(course);
 
-        System.out.println("\t");
-        System.out.println(course.getCourseCode() + ": " + course.getCourseName() + " has been added to your list!");
-
+            System.out.println("\t");
+            System.out.println(course.getCourseCode() + ": "
+                    + course.getCourseName() + " has been added to your list!");
+        } else {
+            System.out.println("\t");
+            System.out.println("Sorry, this course has already been added to your list!");
+        }
     }
 
     // MODIFIES: this
@@ -175,6 +180,7 @@ public class CourseListApp {
             }
             if (coursestaken.getList().contains(changedCourse)) {
                 System.out.println("Course Grade successfully changed!");
+                changedCourse = null;
             } else {
                 System.out.println("\nSorry your course list does not contain that course. Please make sure the "
                         + "course code is spelt correctly!");

@@ -38,12 +38,15 @@ class CoursesTakenTest {
 
     @Test
     void testAddCourse() {
-        testCourseList.addCourse(testCourse1);
+        assertTrue(testCourseList.addCourse(testCourse1));
         assertEquals(testCourse1, testCourseList.coursesTaken.get(0));
         assertEquals(1, testCourseList.coursesTaken.size());
 
-        testCourseList.addCourse(testCourse3);
+        assertTrue(testCourseList.addCourse(testCourse3));
         assertEquals(testCourse3, testCourseList.coursesTaken.get(1));
+        assertEquals(2, testCourseList.coursesTaken.size());
+
+        assertFalse(testCourseList.addCourse(testCourse1));
         assertEquals(2, testCourseList.coursesTaken.size());
 
 
