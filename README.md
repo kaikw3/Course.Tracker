@@ -32,3 +32,5 @@ maximize your degree.
 - As a user, I want to be able to view the list of my courses in my courses taken list
 - As a user, I want to be able to remove a course from my course taken list
 - As a user, I want to be able to add the grade I got in a course
+- As a user, I want to be able to save my courses taken list (if I choose to)
+- As a user, I want to be able to load my courses taken list from file (if I choose to)
