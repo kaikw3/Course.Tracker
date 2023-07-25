@@ -70,9 +70,9 @@ public class JsonReader {
     // MODIFIES: cr
     // EFFECTS: parses course from JSON object and adds them to courses taken
     private void addCourse(CoursesTaken cr, JSONObject jsonObject) {
-        String courseCode = jsonObject.getString("courseCode");
-        String courseName = jsonObject.getString("courseName");
-        Double courseGrade = jsonObject.getDouble("courseGrade");
+        String courseCode = jsonObject.getString("Course Code");
+        String courseName = jsonObject.getString("Course Name");
+        Double courseGrade = Double.valueOf(jsonObject.getDouble("Course Grade"));
         Course course = new Course(courseCode, courseName, courseGrade);
         cr.addCourse(course);
     }

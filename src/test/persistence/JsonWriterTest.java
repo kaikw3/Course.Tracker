@@ -60,6 +60,8 @@ public class JsonWriterTest extends JsonTest{
             assertEquals("Test Course List", cr.getName());
             List<Course> course = cr.getList();
             assertEquals(2, course.size());
+            checkCourse("CPSC 210", "Software Construction", 90, course.get(0));
+            checkCourse("COMM 293", "Financial Accounting", 96, course.get(1));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");
