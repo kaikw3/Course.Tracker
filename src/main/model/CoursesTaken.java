@@ -49,7 +49,7 @@ public class CoursesTaken implements Writeable {
                 break;
             }
         }
-        if (!added || coursesTaken.isEmpty()) {
+        if (!added | coursesTaken.size() == 0) {
             this.coursesTaken.add(course);
             return true;
         } else {
