@@ -72,7 +72,7 @@ public class JsonReader {
     private void addCourse(CoursesTaken cr, JSONObject jsonObject) {
         String courseCode = jsonObject.getString("courseCode");
         String courseName = jsonObject.getString("courseName");
-        Double courseGrade = Double.valueOf(jsonObject.getDouble("courseGrade"));
+        Double courseGrade = jsonObject.getDouble("courseGrade");
         Course course = new Course(courseCode, courseName, courseGrade);
         cr.addCourse(course);
     }

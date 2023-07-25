@@ -38,6 +38,7 @@ class CoursesTakenTest {
 
     @Test
     void testAddCourse() {
+        assertTrue(testCourseList.getList().isEmpty());
         assertTrue(testCourseList.addCourse(testCourse1));
         assertEquals(testCourse1, testCourseList.coursesTaken.get(0));
         assertEquals(1, testCourseList.coursesTaken.size());
