@@ -62,7 +62,7 @@ public class CoursesTaken implements Writeable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
-        json.put("Course", coursesTaken);
+        json.put("Course", coursesToJson());
         return json;
     }
 
