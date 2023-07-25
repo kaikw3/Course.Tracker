@@ -1,20 +1,30 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writeable;
+
 import java.util.ArrayList;
 
 // Represents a list of courses that have been taken
-public class CoursesTaken {
+public class CoursesTaken implements Writeable {
+    private String name;
     ArrayList<Course> coursesTaken;
 
 
-    // EFFECTS: creates a new list of courses taken
-    public CoursesTaken() {
+    // EFFECTS: creates a new list of courses taken with a name
+    public CoursesTaken(String name) {
+        this.name = name;
         coursesTaken = new ArrayList<>();
     }
 
 
     public ArrayList<Course> getList() {
         return this.coursesTaken;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     // MODIFIES: this
@@ -48,4 +58,21 @@ public class CoursesTaken {
 
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("Course", coursesTaken);
+        return json;
+    }
+
+    //EFFECTS: returns courses in courses taken as a JSON array
+    private JSONArray coursesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Course c : coursesTaken) {
+            jsonArray.put(c.toJson());
+        }
+        return jsonArray;
+    }
 }

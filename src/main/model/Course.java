@@ -1,8 +1,11 @@
 package model;
 
 
+import org.json.JSONObject;
+import persistence.Writeable;
+
 // Represents a course having a course code, course name, and course grade (in percent)
-public class Course {
+public class Course implements Writeable {
     private String courseCode;      // Course code
     private String courseName;      // Name of the course
     private double courseGrade;     // the grade received in the course
@@ -33,5 +36,15 @@ public class Course {
         return this.courseName;
     }
 
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Course Code", courseCode);
+        json.put("Course Name", courseName);
+        json.put("Course Code", courseCode);
+
+        return json;
+    }
 
 }

@@ -17,7 +17,7 @@ class CoursesTakenTest {
 
     @BeforeEach
     void runBefore() {
-        testCourseList = new CoursesTaken();
+        testCourseList = new CoursesTaken("Kai's Course List");
         testCourse1 = new Course("cpsc 110", "dr racket", 80.2);
         testCourse2 = new Course("comm 293", "intro to accounting", 95);
         testCourse3 = new Course("", "", 0);

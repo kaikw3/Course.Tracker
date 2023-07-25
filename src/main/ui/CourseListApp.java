@@ -12,20 +12,26 @@ Availability: https://github.students.cs.ubc.ca/CPSC210/TellerApp
 
 import model.Course;
 import model.CoursesTaken;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Represents the user interface console
 public class CourseListApp {
-    private Course course;
+    private static final String JSON_STORAGE = "./data/coursesTaken.json";
     private CoursesTaken coursestaken;
     private Scanner input;
     private Course removeCourse;
     private Course changedCourse;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
 
     // EFFECTS: runs the course list Application
-    public CourseListApp() {
+    public CourseListApp() throws FileNotFoundException {
         runCourseList();
     }
 
@@ -43,6 +49,8 @@ public class CourseListApp {
             action = action.toLowerCase();
 
             if (action.equals("quit")) {
+                System.out.println("\t");
+                System.out.println("Thanks for using CourseTracker!");
                 appRun = false;
             } else {
                 processAction(action);
@@ -62,6 +70,10 @@ public class CourseListApp {
             doViewCourseList();
         } else if (action.equals("change grade")) {
             doSetCourseGrade();
+        } else if (action.equals("save")) {
+            doSaveList();
+        } else if (action.equals("load")) {
+            doLoadList();
         } else {
             System.out.println("Sorry, please input a valid selection.");
         }
@@ -71,10 +83,10 @@ public class CourseListApp {
     // MODIFIES: this
     // EFFECTS: initializes course and courses taken list
     private void initialize() {
-        course = new Course("", "", 0);
-        coursestaken = new CoursesTaken();
-
+        coursestaken = new CoursesTaken("Kai's Course List");
         input = new Scanner(System.in).useDelimiter("\n");
+        jsonWriter = new JsonWriter(JSON_STORAGE);
+        jsonReader = new JsonReader(JSON_STORAGE);
 
     }
 
@@ -85,6 +97,8 @@ public class CourseListApp {
         System.out.println("\t \"remove\" -> Remove a course");
         System.out.println("\t \"view\" -> View your course list");
         System.out.println("\t \"change grade\" -> Change grade of a course");
+        System.out.println("\t \"save\" -> save course list to file");
+        System.out.println("\t \"load\" -> load course list from file");
         System.out.println("\t \"quit\" -> Quit Application");
         System.out.println("\nWelcome to CourseTracker, your personal course tracking application! "
                 + "Please select a menu option from above by typing in the word of the action: ");
@@ -189,6 +203,23 @@ public class CourseListApp {
 
     }
 
+    private void doSaveList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(coursestaken);
+            jsonWriter.close();
+            System.out.println("Course Taken list saved to" + JSON_STORAGE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Saved failed.");
+        }
+    }
 
+    private void doLoadList() {
+        try {
+            coursestaken = jsonReader.reader();
+            System.out.println("Loaded list from" + JSON_STORAGE);
+        } catch (IOException e) {
+            System.out.println("Load Failed.");
+        }
+    }
 }
-
