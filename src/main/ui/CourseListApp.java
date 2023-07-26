@@ -203,21 +203,24 @@ public class CourseListApp {
 
     }
 
+    // EFFECTS: saves current courses taken list to file
     private void doSaveList() {
         try {
             jsonWriter.open();
             jsonWriter.write(coursestaken);
             jsonWriter.close();
-            System.out.println("Course Taken list saved to" + JSON_STORAGE);
+            System.out.println("Course list saved to" + JSON_STORAGE);
         } catch (FileNotFoundException e) {
             System.out.println("Saved failed.");
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads courses taken list from file
     private void doLoadList() {
         try {
             coursestaken = jsonReader.reader();
-            System.out.println("Loaded list from" + JSON_STORAGE);
+            System.out.println("Loaded course list from" + JSON_STORAGE);
         } catch (IOException e) {
             System.out.println("Load Failed.");
         }
