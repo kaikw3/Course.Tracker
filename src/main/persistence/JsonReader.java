@@ -40,10 +40,10 @@ public class JsonReader {
     }
 
     // EFFECTS: reads source file as string and returns it
-    private String readFile(String sourcefile) throws IOException {
+    private String readFile(String sourceFile) throws IOException {
         StringBuilder content = new StringBuilder();
 
-        try (Stream<String> stream = Files.lines(Paths.get(sourcefile), StandardCharsets.UTF_8)) {
+        try (Stream<String> stream = Files.lines(Paths.get(sourceFile), StandardCharsets.UTF_8)) {
             stream.forEach(s -> content.append(s));
         }
         return content.toString();
