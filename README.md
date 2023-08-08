@@ -37,4 +37,20 @@ maximize your degree.
 
 
 
-# Instructions for Grader
+## Instructions for Grader
+
+##### Adding a Course
+- You can generate the first required action related to adding Xs to a Y by clicking the "Add Course" button,
+    input the course code, course name, and the grade you received in the course and clicking the "Ok" button.
+##### Removing a Course
+- You can generate the second required action related to adding Xs to a Y by clicking the "Remove Course" button
+    and inputting the course code of the course you would like to remove from your list.
+##### Visual Component
+- You can locate my visual component by clicking the "Add Course" button where you will see the UBC logo on the top
+    left hand of the popup window.
+##### Saving Your Course List
+- You can save your course list by clicking the "Save Course List" button, in which a confirmation window appears, where
+    clicking "Yes" will save your current course list.
+##### Loading Your Course List
+- You can reload your course list by clicking the "Load Course List" button once you have opened the application.
+    

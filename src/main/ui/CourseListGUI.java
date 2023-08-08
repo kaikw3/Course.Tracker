@@ -16,37 +16,37 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
 import static java.lang.Double.parseDouble;
 
-public class CourseListGUI extends JFrame {
 
-    protected CoursesTaken coursesTaken;
-    private DefaultTableModel courseTable;
+// Represents a graphical user interface
+public class CourseListGUI extends JFrame {
 
     protected static final String JSON_STORAGE = "./data/coursesTaken.json";
     private static final int WIDTH = 600;
     private static final int HEIGHT = 700;
 
+    private CoursesTaken coursesTaken;
+    private DefaultTableModel courseTable;
+
     private JFrame mainScreen;
+    private JPanel titleBar;
+    private JPanel bottomBar;
+    private JTable courseList;
+
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
     private ImageIcon ubcLogo;
-
-    private JPanel titleBar;
-    private JPanel bottomBar;
-    protected JTable courseList;
 
     private Border border;
     private Color navyBlue;
     private Color yellow;
 
-
     private String courseCode;
     private String courseName;
     private String courseGrade;
 
-
+    // EFFECTS: Creates the GUI and initializes its components
     public CourseListGUI() {
         super("CourseListGUI");
         initializeData();
@@ -54,6 +54,8 @@ public class CourseListGUI extends JFrame {
         mainScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates and initializes the main screen and its components
     private void initializeScreen() {
         mainScreen = new JFrame("Course List");
         navyBlue = new Color(0, 0, 153);
@@ -68,6 +70,8 @@ public class CourseListGUI extends JFrame {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates and initializes the title bar of the screen
     private void initializeTitleBar() {
         titleBar = new JPanel();
         titleBar.setPreferredSize(new Dimension(400, 80));
@@ -81,6 +85,8 @@ public class CourseListGUI extends JFrame {
         mainScreen.add(titleBar, BorderLayout.NORTH);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates and initializes the bottom bar of the screen
     private void initializeBottomBar() {
         bottomBar = new JPanel();
         bottomBar.setPreferredSize(new Dimension(400, 60));
@@ -88,10 +94,11 @@ public class CourseListGUI extends JFrame {
         border = BorderFactory.createEmptyBorder();
 
         constructButtons();
-
         mainScreen.add(bottomBar, BorderLayout.SOUTH);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates and initializes buttons
     private void constructButtons() {
         constructAddButton();
         bottomBar.add(Box.createHorizontalStrut(10));
@@ -102,6 +109,8 @@ public class CourseListGUI extends JFrame {
         constructLoadButton();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates a new add button
     private void constructAddButton() {
         JButton addButton = new JButton("Add Course");
         addButton.setVerticalAlignment(JButton.BOTTOM);
@@ -114,6 +123,8 @@ public class CourseListGUI extends JFrame {
         bottomBar.add(addButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates a new remove button
     private void constructRemoveButton() {
         JButton removeButton = new JButton("Remove Course");
         removeButton.setVerticalAlignment(JButton.BOTTOM);
@@ -124,6 +135,8 @@ public class CourseListGUI extends JFrame {
         bottomBar.add(removeButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates a new load button
     private void constructLoadButton() {
         JButton loadButton = new JButton("Load Course List");
         loadButton.setVerticalAlignment(JButton.BOTTOM);
@@ -134,6 +147,8 @@ public class CourseListGUI extends JFrame {
         bottomBar.add(loadButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates a new save button
     private void constructSaveButton() {
         JButton saveButton = new JButton("Save Course List");
         saveButton.setVerticalAlignment(JButton.BOTTOM);
@@ -145,6 +160,8 @@ public class CourseListGUI extends JFrame {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: Initializes the table model and table to display course list
     private void initializeList() {
         courseTable = new DefaultTableModel();
         courseList = new JTable(courseTable);
@@ -159,7 +176,8 @@ public class CourseListGUI extends JFrame {
         mainScreen.add(scrollPane, BorderLayout.CENTER);
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: Initializes the data of the application
     private void initializeData() {
         jsonReader = new JsonReader(JSON_STORAGE);
         jsonWriter = new JsonWriter(JSON_STORAGE);
@@ -169,6 +187,7 @@ public class CourseListGUI extends JFrame {
 
     }
 
+    // EFFECTS: Initializes the image and its sizing
     private void initializeImage() {
         BufferedImage image = null;
         try {
@@ -181,6 +200,10 @@ public class CourseListGUI extends JFrame {
         ubcLogo = new ImageIcon(resized);
     }
 
+    // MODIFIES: this, coursesTaken
+    // EFFECTS: Creates a popup window to get course details input from the user and add if not already added,
+    //          adds the course to the table and coursesTaken list, but if already added, shows confirmation dialog
+    //          that the course has already been added
     private void addCourse() {
         AddCoursePopup addCoursePopup = new AddCoursePopup();
         JPanel addPanel = addCoursePopup.getAddPanel();
@@ -205,18 +228,36 @@ public class CourseListGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this, coursesTaken
+    // EFFECTS: Creates a popup window to get course code of course to remove from the user and add if contained in
+    //          course list, removes it from the table and coursesTaken list
     private void removeCourse() {
         String removeCourseName = JOptionPane.showInputDialog(
                 "Please enter the course code of the course you would like to remove.");
-        String removeCourse = "";
+        String removeCourseTable = "";
         for (int i = 0; i < courseTable.getRowCount(); i++) {
-            removeCourse = courseTable.getValueAt(i, 0).toString();
-            if (removeCourse.equalsIgnoreCase(removeCourseName)) {
+            removeCourseTable = courseTable.getValueAt(i, 0).toString();
+            if (removeCourseTable.equalsIgnoreCase(removeCourseName)) {
                 courseTable.removeRow(i);
             }
         }
+        Course removeCourseList = null;
+        for (Course c : coursesTaken.getList()) {
+            if (c.getCourseCode().equalsIgnoreCase(removeCourseName)) {
+                removeCourseList = c;
+            }
+        }
+        if (coursesTaken.removeCourse(removeCourseList)) {
+            coursesTaken.removeCourse(removeCourseList);
+        } else {
+            JOptionPane.showMessageDialog(null, "Sorry,"
+                    + " this course is not in your course list!");
+        }
     }
 
+    // MODIFIES: this, coursesTaken
+    // EFFECTS: Creates a confirmation save dialog, and if confirmed, then saves the current course list to
+    //          destination file, once completed will show an action completed dialog
     private void saveCourse() {
         int saveConfirmation = JOptionPane.showConfirmDialog(
                 null,
@@ -234,6 +275,9 @@ public class CourseListGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this, coursesTaken
+    // EFFECTS: Creates a confirmation save dialog, and if confirmed, then loads data stored in file and
+    //          loads it to the table and coursesTaken list, once completed will show an action completed dialog
     private void loadCourse() {
         int loadConfirmation = JOptionPane.showConfirmDialog(
                 null,
@@ -244,8 +288,10 @@ public class CourseListGUI extends JFrame {
                 for (Course c : loadedList.getList()) {
                     String[] loadCourse = {c.getCourseCode(),
                             c.getCourseName(), Double.toString(c.getCourseGrade())};
-                    courseTable.addRow(loadCourse);
-                    coursesTaken.addCourse(c);
+                    if (coursesTaken.addCourse(c)) {
+                        courseTable.addRow(loadCourse);
+                        coursesTaken.addCourse(c);
+                    }
                 }
                 JOptionPane.showMessageDialog(null, "Load Completed!");
             } catch (IOException e) {
