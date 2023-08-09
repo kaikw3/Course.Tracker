@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 // Citation: CPSC 210 Team
 
@@ -15,6 +15,7 @@ public class EventTest {
 
     private Event event;
     private Date date;
+    private int testInt;
 
 
     //NOTE: these tests might fail if time at which line (2) below is executed
@@ -38,4 +39,20 @@ public class EventTest {
     public void testToString() {
         assertEquals(date.toString() + "\n" + "Added Course, CPSC 210: Software Construction", event.toString());
     }
+
+    @Test
+    public void testEquals() {
+        assertTrue(event.equals(event));
+        assertFalse(event.equals(null));
+        assertFalse(event.equals(testInt));
+
+    }
+
+    @Test
+    public void testHash() {
+        assertEquals(event.hashCode(), event.hashCode());
+
+    }
+
+
 }
