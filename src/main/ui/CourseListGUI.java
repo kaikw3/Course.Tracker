@@ -2,6 +2,8 @@ package ui;
 
 import model.Course;
 import model.CoursesTaken;
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -11,6 +13,8 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,6 +56,7 @@ public class CourseListGUI extends JFrame {
         initializeData();
         initializeScreen();
         mainScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainScreen.addWindowListener(windowClosed);
     }
 
     // MODIFIES: this
@@ -199,6 +204,18 @@ public class CourseListGUI extends JFrame {
         Image resized = image.getScaledInstance(40, 55, Image.SCALE_SMOOTH);
         ubcLogo = new ImageIcon(resized);
     }
+
+    private WindowAdapter windowClosed = new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent windowEvent) {
+            super.windowClosing(windowEvent);
+
+            for (model.Event e : model.EventLog.getInstance()) {
+                System.out.println(e);
+            }
+        }
+    };
+
 
     // MODIFIES: this, coursesTaken
     // EFFECTS: Creates a popup window to get course details input from the user and add if not already added,

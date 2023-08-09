@@ -32,6 +32,8 @@ public class CoursesTaken implements Writeable {
     public Boolean removeCourse(Course course) {
         if (coursesTaken.contains(course)) {
             coursesTaken.remove(course);
+            EventLog.getInstance().logEvent(new Event("Removed course, " + course.getCourseCode() + ": "
+                    + course.getCourseName()));
             return true;
         } else {
             return false;
@@ -51,6 +53,8 @@ public class CoursesTaken implements Writeable {
         }
         if (!added | coursesTaken.size() == 0) {
             this.coursesTaken.add(course);
+            EventLog.getInstance().logEvent(new Event("Added course, " + course.getCourseCode() + ": "
+                    + course.getCourseName()));
             return true;
         } else {
             return false;

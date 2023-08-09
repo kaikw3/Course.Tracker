@@ -12,12 +12,15 @@ Availability: https://github.students.cs.ubc.ca/CPSC210/TellerApp
 
 import model.Course;
 import model.CoursesTaken;
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+
 
 // Represents the user interface console
 public class CourseListApp {
@@ -28,6 +31,14 @@ public class CourseListApp {
     private Course changedCourse;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+
+    private Event event;
+    private EventLog events;
+
+
+    public static void main(String[] args) throws FileNotFoundException {
+        new CourseListApp();
+    }
 
 
     // EFFECTS: runs the course list Application
@@ -51,6 +62,11 @@ public class CourseListApp {
             if (action.equals("quit")) {
                 System.out.println("\t");
                 System.out.println("Thanks for using CourseTracker!");
+
+                for (Event e : EventLog.getInstance()) {
+                    System.out.println(e);
+                }
+
                 appRun = false;
             } else {
                 processAction(action);

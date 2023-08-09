@@ -54,3 +54,17 @@ maximize your degree.
 ##### Loading Your Course List
 - You can reload your course list by clicking the "Load Course List" button once you have opened the application.
     
+
+## Phase 4: Task 2
+* Wed Aug 09 01:06:55 PDT 2023
+* Added course, CPSC 103: Introduction to Systematic Program Design
+* Wed Aug 09 01:07:09 PDT 2023
+* Added course, CPSC 210: Software Construction
+* Wed Aug 09 01:07:23 PDT 2023
+* Added course, COMM 293: Introduction to Financial Accounting
+* Wed Aug 09 01:07:56 PDT 2023
+* Added course, COMM 294: Introduction to Managerial Accounting
+* Wed Aug 09 01:08:31 PDT 2023
+* Added course, COMM 296: Introduction to Marketing
+* Wed Aug 09 01:08:36 PDT 2023
+* Removed course, COMM 296: Introduction to Marketing
